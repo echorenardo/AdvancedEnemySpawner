@@ -101,3 +101,4 @@ MonoBehaviour:
   _soldier: {fileID: -6328876079793114364}
   _maxMoveSpeed: 4
   _animator: {fileID: 3704242055777558425}
+  _triggerDistance: 4

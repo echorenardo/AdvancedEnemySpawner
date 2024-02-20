@@ -92,6 +92,7 @@ MonoBehaviour:
   _soldier: {fileID: 6906961682043154471}
   _maxMoveSpeed: 4
   _animator: {fileID: 5285100163326911416}
+  _triggerDistance: 4
 --- !u!95 &5285100163326911416 stripped
 Animator:
   m_CorrespondingSourceObject: {fileID: 5866666021909216657, guid: 8cf152a0a06b3dc47a7c6d40918d95a9, type: 3}

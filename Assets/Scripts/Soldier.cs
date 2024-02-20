@@ -10,7 +10,7 @@ public class Soldier : MonoBehaviour
     [SerializeField] private Soldier _soldier;
     [SerializeField, Range(0f, 4f)] private float _maxMoveSpeed;
     [SerializeField] private Animator _animator;
-    [SerializeField] private float _triggerDistance = 2f;
+    [SerializeField] private float _triggerDistance = 4f;
 
     private TargetPoint _targetPoint;
 
