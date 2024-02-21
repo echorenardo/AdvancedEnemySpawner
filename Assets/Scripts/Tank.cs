@@ -10,6 +10,11 @@ public class Tank : MonoBehaviour
 
     private int _currentControlPoint = 0;
 
+    private void Update()
+    {
+        Move();
+    }
+
     private void Move()
     {
         transform.position = Vector3.MoveTowards(transform.position, _controlPoints[_currentControlPoint].transform.position, _moveSpeed * Time.deltaTime);
@@ -25,10 +30,5 @@ public class Tank : MonoBehaviour
 
         if (_currentControlPoint >= _controlPoints.Count)
             _currentControlPoint = 0;
-    }
-
-    private void Update()
-    {
-        Move();
     }
 }

@@ -14,6 +14,12 @@ public class Soldier : MonoBehaviour
 
     private TargetPoint _targetPoint;
 
+    private void OnEnable()
+    {
+        if (_targetPoint != null)
+            StartCoroutine(GoToTarget());
+    }
+
     public void ChangeState(bool state) => gameObject.SetActive(state);
 
     public void SetTarget(TargetPoint targetPoint) => _targetPoint = targetPoint;
@@ -37,11 +43,5 @@ public class Soldier : MonoBehaviour
         }
 
         ChangeState(false);
-    }
-
-    private void OnEnable()
-    {
-        if (_targetPoint != null)
-            StartCoroutine(GoToTarget());
     }
 }
