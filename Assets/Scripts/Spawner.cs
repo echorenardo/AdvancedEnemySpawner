@@ -7,9 +7,12 @@ public class Spawner : MonoBehaviour
     [SerializeField] private int _poolMaxSize = 5;
     [SerializeField] private Spawner _prefab;
     [SerializeField] private TargetPoint _targetPoint;
+    [SerializeField] private float _spawnFrequency = 2f;
     [SerializeField] private Soldier _soldier;
 
     private List<Soldier> _pool = new();
+
+    private void Start() => InvokeRepeating(nameof(SpawnSoldier), 0f, _spawnFrequency);
 
     private void FillPool()
     {
@@ -34,6 +37,4 @@ public class Spawner : MonoBehaviour
     }
 
     private void Awake() => FillPool();
-
-    private void Start() => InvokeRepeating(nameof(SpawnSoldier), 0f, 2f);
 }
