@@ -1,13 +1,10 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using static UnityEngine.GraphicsBuffer;
 
 public class Soldier : MonoBehaviour
 {
     private const string Speed = "Speed";
 
-    [SerializeField] private Soldier _soldier;
     [SerializeField, Range(0f, 4f)] private float _maxMoveSpeed;
     [SerializeField] private Animator _animator;
     [SerializeField] private float _triggerDistance = 4f;
@@ -20,7 +17,9 @@ public class Soldier : MonoBehaviour
             StartCoroutine(GoToTarget());
     }
 
-    public void ChangeState(bool state) => gameObject.SetActive(state);
+    public void Enable() => gameObject.SetActive(true);
+
+    public void Disable() => gameObject.SetActive(false);
 
     public void SetTarget(TargetPoint targetPoint) => _targetPoint = targetPoint;
 
@@ -42,6 +41,6 @@ public class Soldier : MonoBehaviour
             yield return null;
         }
 
-        ChangeState(false);
+        Disable();
     }
 }

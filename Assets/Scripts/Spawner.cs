@@ -1,18 +1,22 @@
 ﻿using System.Collections.Generic;
+using System.Collections;
 using UnityEngine;
 using System.Linq;
 
 public class Spawner : MonoBehaviour
 {
     [SerializeField] private int _poolMaxSize = 5;
-    [SerializeField] private Spawner _prefab;
+    [SerializeField] private Transform _spawnPoint;
     [SerializeField] private TargetPoint _targetPoint;
     [SerializeField] private float _spawnFrequency = 2f;
     [SerializeField] private Soldier _soldier;
 
     private List<Soldier> _pool = new();
+    private bool _isSpawning = true;
 
-    private void Start() => InvokeRepeating(nameof(SpawnSoldier), 0f, _spawnFrequency);
+    private void Awake() => FillPool();
+
+    private void Start() => StartCoroutine(SpawnPeriodically());
 
     private void FillPool()
     {
@@ -20,7 +24,7 @@ public class Spawner : MonoBehaviour
         {
             Soldier soldier = Instantiate(_soldier);
             soldier.SetTarget(_targetPoint);
-            soldier.ChangeState(false);
+            soldier.Disable();
             _pool.Add(soldier);
         }
     }
@@ -31,10 +35,17 @@ public class Spawner : MonoBehaviour
 
         if (soldier != null)
         {
-            soldier.transform.position = _prefab.transform.position;
-            soldier.ChangeState(true);
+            soldier.transform.position = _spawnPoint.position;
+            soldier.Enable();
         }
     }
 
-    private void Awake() => FillPool();
+    private IEnumerator SpawnPeriodically()
+    {
+        while (_isSpawning)
+        {
+            SpawnSoldier();
+            yield return new WaitForSeconds(_spawnFrequency);
+        }
+    }
 }
