@@ -42,10 +42,12 @@ public class Spawner : MonoBehaviour
 
     private IEnumerator SpawnPeriodically()
     {
+        WaitForSeconds wait = new WaitForSeconds(_spawnFrequency);
+
         while (_isSpawning)
         {
             SpawnSoldier();
-            yield return new WaitForSeconds(_spawnFrequency);
+            yield return wait;
         }
     }
 }
